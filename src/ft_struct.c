@@ -45,12 +45,12 @@ int	ft_list_push_back(t_list **begin, char *data)
 
 static void	ft_correct_location(t_fdf *fdf)
 {
-	float	max_win;
-	float	max_array;
+	int	max_win;
+	int	max_array;
 
-	max_win = fmax(H_WIN, W_WIN);
-	max_array = fmax(fdf->width_map, fdf->height_map);
-	fdf->zoom = fmax(max_win, max_array) / fmin(max_win, max_array) / 2;
+	max_win = max(H_WIN, W_WIN);
+	max_array = max(fdf->width_map, fdf->height_map);
+	fdf->zoom = max(max_win, max_array) / min(max_win, max_array) >> 1;
 	fdf->max_z = INT_MIN;
 	fdf->min_z = INT_MAX;
 }

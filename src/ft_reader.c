@@ -6,7 +6,7 @@
 /*   By: bstrong <bstrong@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 17:14:27 by bstrong           #+#    #+#             */
-/*   Updated: 2021/12/17 14:44:06 by bstrong          ###   ########.fr       */
+/*   Updated: 2021/12/22 19:54:09 by bstrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,18 @@ void	ft_reader(t_fdf *fdf, char *file)
 	}
 	else
 		ft_destroy_fdf(fdf, NULL, MSG_ERROR_OPEN, 0);
+}
+
+int	max(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	return (b);
+}
+
+int	min(int a, int b)
+{
+	if (a <= b)
+		return (a);
+	return (b);
 }

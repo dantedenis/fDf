@@ -6,7 +6,7 @@
 /*   By: bstrong <bstrong@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:42:48 by bstrong           #+#    #+#             */
-/*   Updated: 2021/12/21 21:47:53 by bstrong          ###   ########.fr       */
+/*   Updated: 2021/12/22 20:01:05 by bstrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int	main(int argc, char **argv)
 				&fdf->img.lines, &fdf->img.endian);
 		draw_all(fdf, fdf->coords);
 		mlx_hook(fdf->win, 2, 0, key_hook, fdf);
+		mlx_hook(fdf->win, 4, 0, mouse_press, fdf);
+		mlx_hook(fdf->win, 5, 0, mouse_release, fdf);
+		mlx_hook(fdf->win, 6, 0, mouse_move, fdf);
 		mlx_loop(fdf->mlx);
 	}
 	else

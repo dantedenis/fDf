@@ -28,16 +28,13 @@ static void	rotate_parall(t_fdf *fdf)
 
 void	ft_move_zoom(int key, t_fdf *fdf)
 {
-	float	shift;
-
-	shift = 1;
-	if (key == KEY_PLUS)
-		fdf->zoom += 1;
-	if (key == KEY_MINUS)
+	if (key == KEY_PLUS || key == SCROLL_UP)
+		fdf->zoom++;
+	if (key == KEY_MINUS || key == SCROLL_DOWN)
 	{
-		if (fdf->zoom < 2)
-			shift = 0;
-		fdf->zoom -= shift;
+		fdf->zoom--;
+		if (fdf->zoom < 1)
+			fdf->zoom = 1;
 	}
 	if (key == KEY_RIGHT)
 		fdf->shift_x += 50;

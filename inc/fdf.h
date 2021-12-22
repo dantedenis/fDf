@@ -6,7 +6,7 @@
 /*   By: bstrong <bstrong@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 21:10:10 by bstrong           #+#    #+#             */
-/*   Updated: 2021/12/21 21:56:17 by bstrong          ###   ########.fr       */
+/*   Updated: 2021/12/22 21:14:36 by bstrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # define MSG_ERROR_INIT "error init array-map\n"
 # define MSG_ERROR_OPEN "error open file\n"
 # define MSG_SUCC_EXIT "Exit?🤯\nOK, 🖐 GOOD BYE 🤪\n"
-# define MSG_WINDOW_1 "Rotate OX: 1/2    Isometric: I     Zoom: +-"
-# define MSG_WINDOW_2 "Rotate OY: 3/4    Parallel : P"
+# define MSG_WINDOW_1 "Rotate OX: 1/2    Isometric: I\
+      Zoom: +- or Scroll MOUSE"
+# define MSG_WINDOW_2 "Rotate OY: 3/4    Parallel : P\
+      Use mouse for easy rotation "
 # define MSG_WINDOW_3 "Rotate OZ: 5/6    Move maps: <^v>"
 # define W_WIN 1280
 # define H_WIN 720
@@ -44,6 +46,8 @@
 # define KEY_4 21
 # define KEY_5 22
 # define KEY_6 23
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
 typedef struct s_list
 {
@@ -61,6 +65,15 @@ typedef struct s_img
 	int		endian;
 }		t_img;
 
+typedef struct s_mouse
+{
+	char				is_pressed;
+	int					x;
+	int					y;
+	int					pre_x;
+	int					pre_y;
+}		t_mouse;
+
 typedef struct s_coords
 {
 	float	x;
@@ -75,9 +88,10 @@ typedef struct s_fdf
 	void		*win;
 	t_coords	**coords;
 	t_img		img;
+	t_mouse		mouse;
 	ssize_t		height_map;
 	ssize_t		width_map;
-	float		zoom;
+	int			zoom;
 	float		alpha;
 	float		betta;
 	float		gamma;
@@ -142,5 +156,15 @@ void	ft_scale_move(t_fdf *fdf, t_coords *begin, t_coords *end);
 void	set_color(t_fdf *fdf);
 int		get_color_def(t_fdf *fdf, int current);
 int		put_color(t_coords begin, t_coords end, t_coords cur, t_coords delta);
+int		mouse_press(int button, int x, int y, void *param);
+int		mouse_release(int button, int x, int y, void *param);
+int		mouse_move(int x, int y, void *param);
+
+/*
+** other_utils
+*/
+
+int		max(int a, int b);
+int		min(int a, int b);
 
 #endif
