@@ -6,13 +6,13 @@
 #    By: bstrong <bstrong@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 17:42:40 by bstrong           #+#    #+#              #
-#    Updated: 2021/12/22 21:00:28 by bstrong          ###   ########.fr        #
+#    Updated: 2021/12/25 13:22:17 by bstrong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = clang
-FLAGS = -o3 -Werror -Wall -Wextra -g
+FLAGS = -o3 -Werror -Wall -Wextra
 
 SRC_PATH = ./src/
 

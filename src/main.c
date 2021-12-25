@@ -6,7 +6,7 @@
 /*   By: bstrong <bstrong@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:42:48 by bstrong           #+#    #+#             */
-/*   Updated: 2021/12/22 20:01:05 by bstrong          ###   ########.fr       */
+/*   Updated: 2021/12/25 13:22:42 by bstrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ static int	key_hook(int key, t_fdf *fdf)
 	return (1);
 }
 
+static void	init_window(t_fdf **fdf)
+{
+	(*fdf)->mlx = mlx_init();
+	if ((*fdf)->mlx == NULL)
+		ft_destroy_all(*fdf, "Error init mlx\n");
+	(*fdf)->win = mlx_new_window((*fdf)->mlx, W_WIN, H_WIN, "Fil de Fer");
+	if ((*fdf)->win == NULL)
+		ft_destroy_all(*fdf, "Error init win\n");
+	(*fdf)->img.addr = mlx_new_image((*fdf)->mlx, W_WIN, H_WIN);
+	if ((*fdf)->img.addr == NULL)
+		ft_destroy_all(*fdf, "Error init image\n");
+	(*fdf)->img.data = mlx_get_data_addr((*fdf)->img.addr, &(*fdf)->img.bpp,
+			&(*fdf)->img.lines, &(*fdf)->img.endian);
+}
+
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
@@ -32,11 +47,7 @@ int	main(int argc, char **argv)
 	{
 		fdf = (t_fdf *) malloc(sizeof(t_fdf));
 		ft_reader(fdf, argv[1]);
-		fdf->mlx = mlx_init();
-		fdf->win = mlx_new_window(fdf->mlx, W_WIN, H_WIN, "Fil de Fer");
-		fdf->img.addr = mlx_new_image(fdf->mlx, W_WIN, H_WIN);
-		fdf->img.data = mlx_get_data_addr(fdf->img.addr, &fdf->img.bpp,
-				&fdf->img.lines, &fdf->img.endian);
+		init_window(&fdf);
 		draw_all(fdf, fdf->coords);
 		mlx_hook(fdf->win, 2, 0, key_hook, fdf);
 		mlx_hook(fdf->win, 4, 0, mouse_press, fdf);
